@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const AppState_1 = require("./AppState");
+const ToDoForm_1 = require("./components/ToDoForm");
+const ToDoTask_1 = require("./components/ToDoTask");
+const divApp = document.querySelector("#app");
+const forma = new ToDoForm_1.ToDoForm();
+forma.addTo(divApp);
+const naslov = document.createElement("h1");
+naslov.innerHTML = "MY TASKS";
+divApp.append(naslov);
+const podDiv = document.createElement("div");
+podDiv.classList.add("pod_div");
+divApp.append(podDiv);
+const unscheduled = new ToDoTask_1.UnscheduledTask("");
+AppState_1.AppState.state.subscribe(unscheduled);
+unscheduled.addTo(podDiv);
+const scheduled = new ToDoTask_1.ScheduledTask("", "");
+AppState_1.AppState.state.subscribe2(scheduled);
+scheduled.addTo(podDiv);
+const completed = new ToDoTask_1.CompletedTasks("");
+AppState_1.AppState.state.mark(completed);
+completed.addTo(podDiv);
+//# sourceMappingURL=app.js.map
